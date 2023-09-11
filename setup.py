@@ -18,7 +18,7 @@ setup(
     packages=find_packages(exclude=['tests']),
     install_requires=requirements,
     entry_points={
-        "pytest11": ["flask_fixture = flask_fixture.conftest"],
+        "pytest11": ["flask_fixture = flask_fixture"],
     },
     classifiers=[
         'Operating System :: MacOS :: MacOS X',
