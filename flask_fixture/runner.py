@@ -10,6 +10,7 @@ def run_flask(queue, port, app_fabric):
     app = app_fabric('flask_fixture')
 
     for route in routes:
+        print('add route', route)
         routing = app.route(*(route.args), **(route.kwargs))
         routing(route.function)
 
