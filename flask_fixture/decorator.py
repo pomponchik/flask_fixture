@@ -14,5 +14,6 @@ def endpoint(*args: Any, **kwargs: Any):
                 function=function,
             )
         )
+        print('routes:', routes)
         return function
     return decorator
