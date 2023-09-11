@@ -20,5 +20,5 @@ def local_server_url() -> str:
     process = multiprocessing.Process(target=run_flask, args=(queue, port, app_fabric))
     process.start()
     queue.get()
-    yield f'http://localhost:{port}'
+    yield f'http://localhost:{port}/'
     process.terminate()
