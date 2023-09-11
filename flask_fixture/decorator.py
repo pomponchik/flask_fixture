@@ -15,6 +15,7 @@ def endpoint(*args: Any, **kwargs: Any):
             )
         )
         print('routes:', routes)
+        import os
         with open('file.txt', 'w') as file:
             file.write(f'routes {os.getpid()}: {routes}')
         import os
