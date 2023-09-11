@@ -13,7 +13,7 @@ def local_server_url() -> str:
     Run and shutdown the flask server, return a URL of the server.
     """
 
-    port: int = 3000
+    port: int = 5001
     app_fabric: Callable = Flask
 
     queue = multiprocessing.Queue()
