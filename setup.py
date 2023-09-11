@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 with open('README.md', 'r', encoding='utf8') as readme_file:
     readme = readme_file.read()
 
-requirements = ['flask==2.0.0']
+requirements = ['flask==1.1.4']
 
 setup(
     name='flask_fixture',
@@ -24,6 +24,7 @@ setup(
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: Microsoft :: Windows',
         'Operating System :: POSIX',
+        'Operating System :: POSIX :: Linux',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
