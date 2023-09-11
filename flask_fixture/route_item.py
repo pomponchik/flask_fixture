@@ -6,4 +6,4 @@ from typing import Tuple, Dict, Callable, Any
 class RouteItem:
     args: Tuple[Any, ...]
     kwargs: Dict[str, Any]
-    function: Callable[[Any, ...], Any]
+    function: Callable
