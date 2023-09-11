@@ -3,7 +3,7 @@ import requests
 
 
 
-def test_run_server(local_server_url):
+def test_run_server(local_server_url, root):
     from time import sleep
     sleep(2.0)
     print(requests.get(local_server_url).text)

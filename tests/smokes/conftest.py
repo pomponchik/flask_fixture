@@ -1,3 +1,4 @@
+import pytest
 from flask_fixture import endpoint
 
 
