@@ -23,12 +23,16 @@ jobs:
       shell: bash
       run: python setup.py install
 
+    - name: Install dependencies
+      shell: bash
+      run: pip install -r requirements_dev.txt
+
     - name: Print all libs
       shell: bash
       run: pip list
 
     - name: Run tests and show coverage on the command line
-      run: coverage run --source=flask_fixture --omit="*tests*" -m pytest --cache-clear --assert=plain && coverage report -m
+      run: coverage run --source=flask_fixture --omit="*tests*" -m pytest --cache-clear --assert=plain -n=auto && coverage report -m
 
     - name: Upload reports to codecov
       env:

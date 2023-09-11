@@ -1,0 +1,2 @@
+class NeedToDefineURLError(Exception):
+    pass
