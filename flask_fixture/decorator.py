@@ -15,5 +15,7 @@ def endpoint(*args: Any, **kwargs: Any):
             )
         )
         print('routes:', routes)
+        import os
+        print('back PID:', os.getpid())
         return function
     return decorator
