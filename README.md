@@ -1,4 +1,4 @@
-![logo](https://raw.githubusercontent.com/pomponchik/flask_fixture/main/docs/assets/logo_3.png)
+![logo](https://raw.githubusercontent.com/pomponchik/flask_fixture/main/docs/assets/logo_4.png)
 
 # flask_fixture: start and stop the flask server for your tests
 
