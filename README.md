@@ -26,7 +26,7 @@ def root():
     return 'some text'
 ```
 
-And use a URL of server in your tests as a fixture `local_server_url`:
+And use a URL of a server in your tests as a fixture `local_server_url`:
 
 ```python
 import requests
