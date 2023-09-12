@@ -1,7 +1,5 @@
 ![logo](https://raw.githubusercontent.com/pomponchik/flask_fixture/main/docs/assets/logo_5.png)
 
-# flask_fixture: start and stop the flask server for your tests
-
 [![Downloads](https://static.pepy.tech/badge/flask_fixture/month)](https://pepy.tech/project/flask_fixture)
 [![Downloads](https://static.pepy.tech/badge/flask_fixture)](https://pepy.tech/project/flask_fixture)
 [![codecov](https://codecov.io/gh/pomponchik/flask_fixture/graph/badge.svg?token=8iyMsUaLvN)](https://codecov.io/gh/pomponchik/flask_fixture)
