@@ -10,22 +10,12 @@ def run_flask(queue, port, files_with_routes, modules):
     """
     Функция запускает сервер Flask для выполнения тестов.
     """
-
-    """
-    for file_name in files_with_routes:
-        spec = importlib.util.spec_from_file_location('kek', os.path.abspath(file_name))
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-    """
     for module in modules:
         __import__(module)
 
     app = Flask('flask_fixture')
 
-    import sys
-    print('modules', sys.modules)
     for route in routes:
-        print('add route', route)
         routing = app.route(*(route.args), **(route.kwargs))
         routing(route.function)
 

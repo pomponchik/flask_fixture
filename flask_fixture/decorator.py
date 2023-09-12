@@ -14,11 +14,5 @@ def endpoint(*args: Any, **kwargs: Any):
                 function=function,
             )
         )
-        print('routes:', routes)
-        import os
-        with open('file.txt', 'a') as file:
-            file.write(f'routes {os.getpid()}: {routes}')
-        import os
-        print('back PID:', os.getpid())
         return function
     return decorator
