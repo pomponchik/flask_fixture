@@ -5,11 +5,11 @@ from flask import Flask
 from flask_fixture.collection_of_routes import routes
 
 
-def run_flask(queue, port):
+def run_flask(queue, port, files_with_routes):
     """
     Функция запускает сервер Flask для выполнения тестов.
     """
-    files_with_routes = {x.path for x in routes}
+
 
     for file_name in files_with_routes:
         spec = importlib.util.spec_from_file_location('kek', os.path.abspath(python_file))
