@@ -1,3 +1,5 @@
+![logo](https://raw.githubusercontent.com/pomponchik/flask_fixture/main/docs/assets/logo_3.png)
+
 # flask_fixture: start and stop the flask server for your tests
 
 [![Downloads](https://static.pepy.tech/badge/flask_fixture/month)](https://pepy.tech/project/flask_fixture)
