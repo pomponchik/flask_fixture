@@ -1,9 +1,11 @@
 import importlib
 
+from flask import Flask
+
 from flask_fixture.collection_of_routes import routes
 
 
-def run_flask(queue, port, app_fabric):
+def run_flask(queue, port):
     """
     Функция запускает сервер Flask для выполнения тестов.
     """
@@ -14,7 +16,7 @@ def run_flask(queue, port, app_fabric):
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
 
-    app = app_fabric('flask_fixture')
+    app = Flask('flask_fixture')
 
     for route in routes:
         print('add route', route)
