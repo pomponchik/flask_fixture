@@ -1,3 +1,4 @@
+import os
 import importlib
 
 from flask import Flask
@@ -20,7 +21,7 @@ def run_flask(queue, port, files_with_routes):
 
     for route in routes:
         print('add route', route)
-        routing = route(*(route.args), **(route.kwargs))
+        routing = app.route(*(route.args), **(route.kwargs))
         routing(route.function)
 
     queue.put(None)
