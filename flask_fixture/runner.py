@@ -14,6 +14,8 @@ def run_flask(queue, port, app_fabric):
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
 
+    app = app_fabric('flask_fixture')
+
     for route in routes:
         print('add route', route)
         routing = route(*(route.args), **(route.kwargs))
@@ -21,4 +23,4 @@ def run_flask(queue, port, app_fabric):
 
     queue.put(None)
 
-    run(host='localhost', port=port)
+    app.run(port=port)
