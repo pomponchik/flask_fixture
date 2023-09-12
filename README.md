@@ -8,3 +8,6 @@
 [![Test-Package](https://github.com/pomponchik/flask_fixture/actions/workflows/tests_and_coverage.yml/badge.svg)](https://github.com/pomponchik/flask_fixture/actions/workflows/tests_and_coverage.yml)
 [![Python versions](https://img.shields.io/pypi/pyversions/flask_fixture.svg)](https://pypi.python.org/pypi/flask_fixture)
 [![PyPI version](https://badge.fury.io/py/flask_fixture.svg)](https://badge.fury.io/py/flask_fixture)
+
+
+A simple plugin for [Pytest](https://docs.pytest.org/) containing a [fixture](https://docs.pytest.org/explanation/fixtures.html) that can start and stop the Flask server to run related tests. You just have to define the routes.
