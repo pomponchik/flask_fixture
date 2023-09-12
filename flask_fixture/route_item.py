@@ -10,6 +10,8 @@ class RouteItem:
     kwargs: Dict[str, Any]
     function: Callable
     path: Optional[str] = None
+    module: Optional[str] = None
 
     def __post_init__(self):
         self.path = os.path.abspath(inspect.getfile(self.function))
+        self.module = inspect.getmodule(self.function)
