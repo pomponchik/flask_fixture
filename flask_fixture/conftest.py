@@ -25,5 +25,3 @@ def local_server_url() -> str:
     queue.get()
     yield f'http://localhost:{port}/'
     process.terminate()
-    with open('file.txt', 'r') as file:
-        print('file:', file.read())
