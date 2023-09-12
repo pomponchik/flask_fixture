@@ -13,7 +13,7 @@ def run_flask(queue, port, files_with_routes):
 
 
     for file_name in files_with_routes:
-        spec = importlib.util.spec_from_file_location('kek', os.path.abspath(python_file))
+        spec = importlib.util.spec_from_file_location('kek', os.path.abspath(file_name))
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
 
