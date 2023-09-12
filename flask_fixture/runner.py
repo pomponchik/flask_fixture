@@ -19,6 +19,8 @@ def run_flask(queue, port, files_with_routes):
 
     app = Flask('flask_fixture')
 
+    import sys
+    print('modules', sys.modules)
     for route in routes:
         print('add route', route)
         routing = app.route(*(route.args), **(route.kwargs))
