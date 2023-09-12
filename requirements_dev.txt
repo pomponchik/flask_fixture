@@ -6,3 +6,4 @@ coverage==7.2.7
 twine==4.0.2
 wheel==0.40.0
 bottle==0.12.25
+pytest-timeout==2.1.0
