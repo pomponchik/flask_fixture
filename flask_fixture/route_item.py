@@ -14,4 +14,4 @@ class RouteItem:
 
     def __post_init__(self):
         self.path = os.path.abspath(inspect.getfile(self.function))
-        self.module = inspect.getmodule(self.function)
+        self.module = inspect.getmodule(self.function).__name__
