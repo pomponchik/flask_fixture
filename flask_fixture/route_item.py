@@ -2,6 +2,8 @@ import inspect
 from dataclasses import dataclass
 from typing import Tuple, Dict, Callable, Any, Optional
 
+from flask_fixture.collection_of_importing_modules import modules
+
 
 @dataclass
 class RouteItem:
@@ -11,7 +13,6 @@ class RouteItem:
     args: Tuple[Any, ...]
     kwargs: Dict[str, Any]
     function: Callable[[...], Any]
-    module: Optional[str] = None
 
     def __post_init__(self):
-        self.module = inspect.getmodule(self.function).__name__
+        modules.add(inspect.getmodule(self.function).__name__)
