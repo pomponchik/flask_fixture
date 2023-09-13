@@ -4,7 +4,6 @@ import requests
 import pytest
 
 import urllib.parse
->>> urllib.parse.urljoin(url1, url2)
 
 
 @pytest.mark.timeout(30)
