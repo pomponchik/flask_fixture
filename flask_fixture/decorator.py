@@ -7,6 +7,8 @@ from flask_fixture.errors import NeedToDefineURLError
 
 def endpoint(*args: Any, **kwargs: Any):
     def decorator(function):
+        if not args:
+            raise NeedToDefineURLError('The first argument to the decorator is to pass the expected URL.')
         routes.append(
             RouteItem(
                 args=args,
