@@ -7,7 +7,7 @@ from flask import Flask
 from flask_fixture.collection_of_routes import routes
 
 
-def run_flask(queue: Queue, port: int, modules: list[str]):
+def run_flask(queue: Queue, port: int, modules: list[str]) -> None:
     """
     The function is designed to run in a separate process. It starts the flask server.
 
