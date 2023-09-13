@@ -14,4 +14,16 @@ def test_run_server(local_server_url):
 @pytest.mark.timeout(30)
 def test_render_simple_template(local_server_url):
     page_url = urllib.parse.urljoin(local_server_url, 'simple_template')
-    assert requests.get(page_url).text
+    page = requests.get(page_url).text
+
+    with open(
+        os.path.join(
+            'tests',
+            'smokes',
+            'data',
+            'templates',
+            'index.html',
+        ),
+        'r',
+    ) as file:
+        assert file.read() == page
