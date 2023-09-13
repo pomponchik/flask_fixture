@@ -2,3 +2,4 @@
 concurrency = multiprocessing
 omit = "*tests*"
 source = flask_fixture
+parallel = True
