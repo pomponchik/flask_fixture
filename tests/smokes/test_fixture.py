@@ -27,4 +27,5 @@ def test_render_simple_template(local_server_url):
         ),
         'r',
     ) as file:
-        assert file.read() == page
+        file_content = file.read()
+        assert file_content == page
