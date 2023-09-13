@@ -17,11 +17,10 @@ def local_server_url() -> str:
     port: int = 5001
     app_fabric: Callable = Flask
 
-    files_with_routes = {x.path for x in routes}
     modules = {x.module for x in routes}
 
     queue = multiprocessing.Queue()
-    process = multiprocessing.Process(target=run_flask, args=(queue, port, list(files_with_routes), modules))
+    process = multiprocessing.Process(target=run_flask, args=(queue, port, modules))
     process.start()
     queue.get()
     yield f'http://localhost:{port}/'

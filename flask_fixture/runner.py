@@ -6,7 +6,7 @@ from flask import Flask
 from flask_fixture.collection_of_routes import routes
 
 
-def run_flask(queue, port, files_with_routes, modules):
+def run_flask(queue, port, modules):
     """
     Функция запускает сервер Flask для выполнения тестов.
     """
