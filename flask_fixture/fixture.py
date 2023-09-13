@@ -18,7 +18,7 @@ def local_server_url(local_server_port: int = 5001) -> str:
 
     The fixture returns the URL of the server, where you can immediately make requests, taking into account the registered routes.
     """
-    modules = {x.module for x in routes}
+    modules = list({x.module for x in routes})
     queue = multiprocessing.Queue()
 
     process = multiprocessing.Process(target=run_flask, args=(queue, local_server_port, modules))
