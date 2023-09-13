@@ -1,9 +1,11 @@
 import os
 import importlib
+from contextlib import redirect_stdout, redirect_stderr
 
 from flask import Flask
 
 from flask_fixture.collection_of_routes import routes
+with contextlib.redirect_stdout()
 
 
 def run_flask(queue, port, modules):
@@ -21,4 +23,6 @@ def run_flask(queue, port, modules):
 
     queue.put(None)
 
-    app.run(port=port)
+    with open(os.devnull, 'w') as devnull:
+        with redirect_stdout(devnull), redirect_stderr(devnull):
+            app.run(port=port)
