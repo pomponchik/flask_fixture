@@ -1,2 +1,4 @@
 class NeedToDefineURLError(Exception):
-    pass
+    """
+    This exception is raised if the user has not passed arguments to the decorator.
+    """
