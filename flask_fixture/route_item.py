@@ -5,6 +5,9 @@ from typing import Tuple, Dict, Callable, Any, Optional
 
 @dataclass
 class RouteItem:
+    """
+    Storage of route signatures.
+    """
     args: Tuple[Any, ...]
     kwargs: Dict[str, Any]
     function: Callable
