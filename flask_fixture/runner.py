@@ -5,7 +5,6 @@ from contextlib import redirect_stdout, redirect_stderr
 from flask import Flask
 
 from flask_fixture.collection_of_routes import routes
-with contextlib.redirect_stdout()
 
 
 def run_flask(queue, port, modules):
