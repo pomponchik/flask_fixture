@@ -5,6 +5,7 @@ from multiprocessing import Queue
 from flask import Flask
 
 from flask_fixture.collection_of_routes import routes
+from flask_fixture.collection_of_configs import configs
 
 
 def run_flask(queue: Queue, port: int, modules: list[str]) -> None:
@@ -22,7 +23,7 @@ def run_flask(queue: Queue, port: int, modules: list[str]) -> None:
     for module in modules:
         __import__(module)
 
-    app = Flask('flask_fixture')
+    app = Flask('flask_fixture', configs['template_folder'])
 
     for route in routes:
         routing = app.route(*(route.args), **(route.kwargs))

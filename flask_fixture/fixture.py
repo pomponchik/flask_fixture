@@ -5,6 +5,8 @@ import pytest
 from flask_fixture.runner import run_flask
 from flask_fixture.collection_of_routes import routes
 from flask_fixture.collection_of_importing_modules import modules
+from flask_fixture.collection_of_configs import configs
+from flask_fixture.errors import NotExpectedConfigFieldError
 
 
 @pytest.fixture(scope='session')
@@ -19,6 +21,10 @@ def local_server_url(local_server_port: int = 5001) -> str:
 
     The fixture returns the URL of the server, where you can immediately make requests, taking into account the registered routes.
     """
+    for config_field_name, config_field_value in configs.items():
+        if config_field_value is None:
+            raise NotExpectedConfigFieldError()
+    
     queue = multiprocessing.Queue()
 
     process = multiprocessing.Process(target=run_flask, args=(queue, local_server_port, list(modules)))
