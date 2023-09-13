@@ -31,7 +31,7 @@ And use a URL of a server in your tests as a fixture `local_server_url`:
 ```python
 import requests
 
-def test_run_server(local_server_url):
+def test_server(local_server_url):
     assert requests.get(local_server_url).text == 'some text'
 ```
 
