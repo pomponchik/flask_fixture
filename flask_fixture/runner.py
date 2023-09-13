@@ -11,7 +11,7 @@ def run_flask(queue: Queue, port: int, modules: list[str]) -> None:
     """
     The function is designed to run in a separate process. It starts the flask server.
 
-    Before starting the server, she does some manipulations:
+    Before starting the server, it does some manipulations:
     1. Imports all modules that used the @endpoint decorator. This is necessary so that the decorator code is executed in the child process, and the list of endpoints descriptions is filled in.
     2. The Flask application is created and all the endpoints collected in the first step are registered in it.
 
