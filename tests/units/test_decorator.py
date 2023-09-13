@@ -9,3 +9,10 @@ def test_endpoint_without_arguments():
         @endpoint()
         def kek():
             pass
+
+
+def test_endpoint_without_breakets():
+    with pytest.raises(NeedToDefineURLError):
+        @endpoint
+        def kek():
+            pass
