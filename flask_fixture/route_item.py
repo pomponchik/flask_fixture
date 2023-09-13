@@ -10,7 +10,7 @@ class RouteItem:
     """
     args: Tuple[Any, ...]
     kwargs: Dict[str, Any]
-    function: Callable
+    function: Callable[[...], Any]
     module: Optional[str] = None
 
     def __post_init__(self):
