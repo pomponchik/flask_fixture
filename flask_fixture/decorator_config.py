@@ -7,6 +7,9 @@ from flask_fixture.collection_of_importing_modules import modules
 from flask_fixture.collection_of_configs import configs
 
 
+class ReferenceConfig:
+    template_folder: str = 'templates'
+
 
 def config(Class: Type) -> Type:
     Class = dataclass(Class)
@@ -25,10 +28,8 @@ def config(Class: Type) -> Type:
         data[field_name] = value
 
     configs.update(data)
-    
+
     return Class
 
 
-@config
-class ReferenceConfig:
-    template_folder: str = 'templates'
+config(ReferenceConfig)
