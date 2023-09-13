@@ -8,7 +8,7 @@
 [![PyPI version](https://badge.fury.io/py/flask_fixture.svg)](https://badge.fury.io/py/flask_fixture)
 
 
-A simple plugin for [Pytest](https://docs.pytest.org/) containing a [fixture](https://docs.pytest.org/explanation/fixtures.html) that can start and stop the Flask server to run related tests. You just have to define the routes.
+A simple plugin for [Pytest](https://docs.pytest.org/) containing a [fixture](https://docs.pytest.org/explanation/fixtures.html) that can start and stop the [Flask server](https://flask.palletsprojects.com/server/) to run related tests. You just have to define the [routes](https://flask.palletsprojects.com/quickstart/#routing).
 
 Install it by the command:
 
