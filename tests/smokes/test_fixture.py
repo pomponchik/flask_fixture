@@ -1,4 +1,5 @@
 import requests
+import pytest
 
 
 @pytest.mark.timeout(180)
