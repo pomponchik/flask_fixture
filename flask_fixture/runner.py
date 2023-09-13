@@ -1,5 +1,4 @@
 import os
-import importlib
 from contextlib import redirect_stdout, redirect_stderr
 
 from flask import Flask

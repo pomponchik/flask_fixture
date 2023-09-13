@@ -1,4 +1,4 @@
-from typing import Any, Callable
+from typing import Any
 
 from flask_fixture.route_item import RouteItem
 from flask_fixture.collection_of_routes import routes

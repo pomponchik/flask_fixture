@@ -1,8 +1,6 @@
 import multiprocessing
-from typing import Callable
 
 import pytest
-from flask import Flask
 
 from flask_fixture.runner import run_flask
 from flask_fixture.collection_of_routes import routes
