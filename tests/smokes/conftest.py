@@ -13,7 +13,6 @@ class MyConfig:
         'smokes',
         'data',
         'templates',
-        'index.html',
     )
 
 @endpoint('/')
@@ -23,12 +22,4 @@ def root():
 
 @endpoint('/simple_template')
 def simple_template():
-    return render_template(
-        os.path.join(
-            'tests',
-            'smokes',
-            'data',
-            'templates',
-            'index.html',
-        )
-    )
+    return render_template('index.html')
