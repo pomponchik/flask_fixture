@@ -6,6 +6,6 @@ from flask_fixture.errors import NeedToDefineURLError
 
 def test_endpoint_without_arguments():
     with pytest.raises(NeedToDefineURLError):
-        @endpoint
+        @endpoint()
         def kek():
             pass
