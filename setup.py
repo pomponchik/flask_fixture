@@ -33,5 +33,6 @@ setup(
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Testing',
         'Framework :: Pytest',
+        'Framework :: Flask',
     ],
 )
