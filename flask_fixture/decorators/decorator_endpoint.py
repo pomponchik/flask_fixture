@@ -1,7 +1,7 @@
 from typing import Any, Callable
 
-from flask_fixture.route_item import RouteItem
-from flask_fixture.collection_of_routes import routes
+from flask_fixture.dataclasses.route_item import RouteItem
+from flask_fixture.state_storage.collection_of_routes import routes
 from flask_fixture.errors import NeedToDefineURLError
 
 

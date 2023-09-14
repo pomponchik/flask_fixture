@@ -3,10 +3,11 @@ from typing import Type
 from dataclasses import dataclass, fields
 
 from flask_fixture.errors import NotExpectedConfigFieldError
-from flask_fixture.collection_of_importing_modules import modules
-from flask_fixture.collection_of_configs import configs
+from flask_fixture.state_storage.collection_of_importing_modules import modules
+from flask_fixture.state_storage.collection_of_configs import configs
 
 
+@dataclass
 class ReferenceConfig:
     template_folder: str = 'templates'
 

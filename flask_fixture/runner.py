@@ -5,9 +5,9 @@ from multiprocessing import Queue
 
 from flask import Flask
 
-from flask_fixture.collection_of_routes import routes
-from flask_fixture.collection_of_configs import configs
-from flask_fixture.running_startup_result import RunningStartupResult
+from flask_fixture.state_storage.collection_of_routes import routes
+from flask_fixture.state_storage.collection_of_configs import configs
+from flask_fixture.dataclasses.running_startup_result import RunningStartupResult
 
 
 def run_flask(queue: Queue, port: int, modules: list[str]) -> None:

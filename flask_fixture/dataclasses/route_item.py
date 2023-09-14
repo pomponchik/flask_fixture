@@ -2,7 +2,7 @@ import inspect
 from dataclasses import dataclass
 from typing import Tuple, Dict, Callable, Any, Optional
 
-from flask_fixture.collection_of_importing_modules import modules
+from flask_fixture.state_storage.collection_of_importing_modules import modules
 
 
 @dataclass
