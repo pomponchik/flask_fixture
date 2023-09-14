@@ -45,7 +45,7 @@ def run_flask(queue: Queue, port: int, modules: list[str]) -> None:
         startup_result.exception_string = str(e)
 
     finally:
-        queue.put(None)
+        queue.put(startup_result)
         if not startup_result.success:
             return
 
