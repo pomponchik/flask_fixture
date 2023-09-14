@@ -6,7 +6,7 @@ from flask_fixture.runner import run_flask
 from flask_fixture.collection_of_routes import routes
 from flask_fixture.collection_of_importing_modules import modules
 from flask_fixture.collection_of_configs import configs
-from flask_fixture.errors import NotExpectedConfigFieldError
+from flask_fixture.errors import NotExpectedConfigFieldError, UnsuccessfulProcessStartupError
 
 
 @pytest.fixture(scope='session')
@@ -24,12 +24,19 @@ def local_server_url(local_server_port: int = 5001) -> str:
     for config_field_name, config_field_value in configs.items():
         if config_field_value is None:
             raise NotExpectedConfigFieldError()
-    
+
     queue = multiprocessing.Queue()
 
     process = multiprocessing.Process(target=run_flask, args=(queue, local_server_port, list(modules)))
+
     process.start()
-    queue.get()
+    startup_result = queue.get()
+    if not startup_result.success:
+        exception = UnsuccessfulProcessStartupError(f'Error {startup_result.exception_name}("{startup_result.exception_string}") when starting the process with the Flask server.')
+        exception.startup_result = startup_result
+        exception.traceback_string = startup_result.traceback_string
+        raise exception
+
 
     yield f'http://localhost:{local_server_port}/'
 
