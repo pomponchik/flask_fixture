@@ -22,7 +22,7 @@ def run_flask(queue: Queue, port: int, modules: list[str]) -> None:
 
     The queue is used to synchronize with the process that started this function. After the function is started, that process starts waiting for the function to put something in the queue. Thus, it is guaranteed that the starting process will not continue its execution before the server initialization occurs. This approach allows you to do without using sleep().
     """
-    startup_result = RunningStartupResult(success=True)
+    startup_result = RunningStartupResult(success=True, routes=[])
     try:
         for module in modules:
             __import__(module)
@@ -30,6 +30,7 @@ def run_flask(queue: Queue, port: int, modules: list[str]) -> None:
         app = Flask('flask_fixture', os.path.abspath(configs['template_folder']))
 
         for route in routes:
+            startup_result.routes.append(str(route))
             routing = app.route(*(route.args), **(route.kwargs))
             routing(route.function)
 
