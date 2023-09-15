@@ -72,6 +72,6 @@ def local_server_url(local_server_port: int = 5001) -> str:
 
     listen_logs(queue)
 
-    yield f'http://localhost:{local_server_port}/'
+    yield f'http://localhost:{configs["port"]}/'
 
     process.terminate()

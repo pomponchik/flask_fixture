@@ -80,4 +80,4 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
     emit_output(queue, buffer_stderr, ChunkType.STDERR)
 
     with redirect_stdout(buffer_stdout), redirect_stderr(buffer_stderr):
-        app.run(port=port)
+        app.run(port=configs['port'])
