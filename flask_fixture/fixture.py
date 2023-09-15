@@ -14,8 +14,9 @@ from flask_fixture.errors import NotExpectedConfigFieldError, UnsuccessfulProces
 
 
 logger: logging.Handler = logging.getLogger('flask_fixture_logger')
-logger.addHandler(logging.StreamHandler())
-logger.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'))
+handler: logging.StreamHandler = logging.StreamHandler()
+logger.addHandler(handler)
+handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'))
 
 @shoot
 def listen_logs(queue: multiprocessing.Queue):
