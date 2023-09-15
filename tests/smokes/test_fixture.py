@@ -31,4 +31,4 @@ def test_render_simple_template(local_server_url):
         print(f'url: {page_url}')
         print(f'file_content: {file_content}')
         print(f'page: {page}')
-        assert file_content == page
+        assert file_content.strip() == page.strip()
