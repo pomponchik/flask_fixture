@@ -55,7 +55,7 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
         traceback.print_exception(e, file=buffer)
         traceback_string = buffer.getvalue()
 
-        startup_result.traceback = traceback_string
+        startup_result.traceback = "traceback_string"
         startup_result.exception_name = e.__class__.__name__
         startup_result.exception_string = str(e)
 
