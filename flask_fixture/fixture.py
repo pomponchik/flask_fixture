@@ -53,7 +53,7 @@ def local_server_url(local_server_port: int = 5001) -> str:
         exception.traceback_string = startup_result.traceback_string
         raise exception
 
-    listening_thread = Thread
+    listen_logs()
 
     yield f'http://localhost:{local_server_port}/'
 
