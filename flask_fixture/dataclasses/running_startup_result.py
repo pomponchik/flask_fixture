@@ -1,5 +1,5 @@
 import json
-from typing import Optional
+from typing import Optional, Dict, Any
 from dataclasses import dataclass, asdict
 
 
@@ -12,3 +12,4 @@ class RunningStartupResult:
     exception_name: Optional[str] = None
     exception_string: Optional[str] = None
     routes: Optional[list[str]] = None
+    configs: configs: Dict[str, Any] = None

@@ -43,7 +43,7 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
 
     The queue is used to synchronize with the process that started this function. After the function is started, that process starts waiting for the function to put something in the queue. Thus, it is guaranteed that the starting process will not continue its execution before the server initialization occurs. This approach allows you to do without using sleep().
     """
-    startup_result = RunningStartupResult(success=True, routes=[])
+    startup_result = RunningStartupResult(success=True, routes=[], configs=configs)
     try:
         for module in modules:
             __import__(module)

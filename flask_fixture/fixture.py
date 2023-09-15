@@ -36,7 +36,7 @@ def listen_logs(queue: multiprocessing.Queue):
             elif chunk.type == ChunkType.STDERR:
                 string: str = chunk.value
                 print(string, end='')
-        
+
         except Exception as e:
             print(e)
 
@@ -63,8 +63,8 @@ def local_server_url(local_server_port: int = 5001) -> str:
 
     process.start()
     startup_result = queue.get()
+    print(startup_result)
     if not startup_result.success:
-        print(startup_result)
         exception = UnsuccessfulProcessStartupError(f'Error {startup_result.exception_name}("{startup_result.exception_string}") when starting the process with the Flask server.')
         exception.startup_result = startup_result
         exception.traceback_string = startup_result.traceback
