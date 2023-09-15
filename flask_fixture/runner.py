@@ -48,7 +48,7 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
         for module in modules:
             __import__(module)
 
-        app = Flask('flask_fixture', os.path.abspath(configs['template_folder']))
+        app = Flask('flask_fixture', template_folder=os.path.abspath(configs['template_folder']))
 
         for route in routes:
             startup_result.routes.append(str(route))
