@@ -24,17 +24,21 @@ def listen_logs(queue: multiprocessing.Queue):
     while True:
         chunk: ProcessOutputChunk = queue.get()
 
-        if chunk.type == ChunkType.LOG_RECORD:
-            record: logging.LogRecord = chunk.value
-            logger.handle(record)
+        try:
+            if chunk.type == ChunkType.LOG_RECORD:
+                record: logging.LogRecord = chunk.value
+                logger.handle(record)
 
-        elif chunk.type == ChunkType.STDOUT:
-            string: str = chunk.value
-            print(string, end='')
+            elif chunk.type == ChunkType.STDOUT:
+                string: str = chunk.value
+                print(string, end='')
 
-        elif chunk.type == ChunkType.STDERR:
-            string: str = chunk.value
-            print(string, end='')
+            elif chunk.type == ChunkType.STDERR:
+                string: str = chunk.value
+                print(string, end='')
+        
+        except Exception as e:
+            print(e)
 
 
 @pytest.fixture(scope='session')
