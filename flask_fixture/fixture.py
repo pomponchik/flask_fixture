@@ -3,7 +3,7 @@ import multiprocessing
 from threading import Thread
 
 import pytest
-from awaits.shoot import shoot
+from awaits import shoot
 
 from flask_fixture.runner import run_flask
 from flask_fixture.state_storage.collection_of_routes import routes
