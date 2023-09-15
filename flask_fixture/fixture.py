@@ -1,12 +1,28 @@
+import logging
 import multiprocessing
+from threading import Thread
 
 import pytest
+from awaits.shoot import shoot
 
 from flask_fixture.runner import run_flask
 from flask_fixture.state_storage.collection_of_routes import routes
 from flask_fixture.state_storage.collection_of_importing_modules import modules
 from flask_fixture.state_storage.collection_of_configs import configs
 from flask_fixture.errors import NotExpectedConfigFieldError, UnsuccessfulProcessStartupError
+
+
+
+logger: logging.Handler = logging.getLogger('flask_fixture_logger')
+logger.addHandler(logging.StreamHandler())
+logger.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'))
+
+@shoot
+def listen_logs(queue: multiprocessing.Queue):
+    while True:
+        record: logging.LogRecord = queue.get()
+        logger.handle(record)
+
 
 
 @pytest.fixture(scope='session')
@@ -37,6 +53,7 @@ def local_server_url(local_server_port: int = 5001) -> str:
         exception.traceback_string = startup_result.traceback_string
         raise exception
 
+    listening_thread = Thread
 
     yield f'http://localhost:{local_server_port}/'
 

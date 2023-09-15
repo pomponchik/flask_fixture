@@ -1,5 +1,6 @@
 import os
 import io
+import logging
 from typing import Dict, List, Any
 from contextlib import redirect_stdout, redirect_stderr
 from multiprocessing import Queue
@@ -8,6 +9,16 @@ from flask import Flask
 
 from flask_fixture.state_storage.collection_of_routes import routes
 from flask_fixture.dataclasses.running_startup_result import RunningStartupResult
+
+
+class QueueHandler(logging.Handler):
+    def __init__(self, queue: Queue):
+            super().__init__(self)
+            self.queue = queue
+
+        def emit(self, record: logging.LogRecord):
+            queue.put(record)
+
 
 
 def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any]) -> None:
@@ -33,6 +44,9 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
             startup_result.routes.append(str(route))
             routing = app.route(*(route.args), **(route.kwargs))
             routing(route.function)
+
+        handler = QueueHandler(queue)
+        logging.root.addHandler(logging_handler)
 
     except Exception as e:
         startup_result.success = False
