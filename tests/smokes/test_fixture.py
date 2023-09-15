@@ -1,5 +1,6 @@
 import os
 import urllib
+import time
 
 import requests
 import pytest
@@ -9,11 +10,13 @@ import urllib.parse
 
 @pytest.mark.timeout(30)
 def test_run_server(local_server_url):
+    time.sleep(1)
     assert requests.get(local_server_url).text == 'kek'
 
 
 @pytest.mark.timeout(30)
 def test_render_simple_template(local_server_url):
+    time.sleep(1)
     page_url = urllib.parse.urljoin(local_server_url, 'simple_template')
     page = requests.get(page_url).text
 
@@ -28,7 +31,4 @@ def test_render_simple_template(local_server_url):
         'r',
     ) as file:
         file_content = file.read()
-        print(f'url: {page_url}')
-        print(f'file_content: {repr(file_content)}')
-        print(f'page: {repr(page)}')
         assert file_content.strip() == page.strip()
