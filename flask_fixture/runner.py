@@ -1,6 +1,7 @@
 import os
 import io
 import logging
+import traceback
 from typing import Dict, List, Any
 from contextlib import redirect_stdout, redirect_stderr
 from multiprocessing import Queue
