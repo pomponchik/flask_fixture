@@ -55,7 +55,7 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
             routing(route.function)
 
         handler = QueueHandler(queue)
-        logging.root.addHandler(handler)
+        #logging.root.addHandler(handler)
 
     except Exception as e:
         startup_result.success = False
