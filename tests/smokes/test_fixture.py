@@ -29,6 +29,6 @@ def test_render_simple_template(local_server_url):
     ) as file:
         file_content = file.read()
         print(f'url: {page_url}')
-        print(f'file_content: {file_content}')
-        print(f'page: {page}')
+        print(f'file_content: {repr(file_content)}')
+        print(f'page: {repr(page)}')
         assert file_content.strip() == page.strip()
