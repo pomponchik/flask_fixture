@@ -51,7 +51,7 @@ def local_server_url(local_server_port: int = 5001) -> str:
     if not startup_result.success:
         exception = UnsuccessfulProcessStartupError(f'Error {startup_result.exception_name}("{startup_result.exception_string}") when starting the process with the Flask server.')
         exception.startup_result = startup_result
-        exception.traceback_string = startup_result.traceback_string
+        exception.traceback_string = startup_result.traceback
         raise exception
 
     listen_logs()
