@@ -3,34 +3,18 @@ from typing import Type
 from dataclasses import dataclass, fields
 
 from flask_fixture.errors import NotExpectedConfigFieldError
-from flask_fixture.state_storage.collection_of_importing_modules import modules
 from flask_fixture.state_storage.collection_of_configs import configs
-
-
-@dataclass
-class ReferenceConfig:
-    template_folder: str = 'templates'
 
 
 def config(Class: Type) -> Type:
     Class = dataclass(Class)
-    modules.add(inspect.getmodule(Class).__name__)
 
-    fields_of_reference = {field.name: (field.default, field.default_factory) for field in fields(ReferenceConfig)}
-    fields_of_new_class = {field.name: (field.default, field.default_factory) for field in fields(Class)}
+    class_fields = {field.name: field.default for field in fields(Class)}
 
-    data = {}
-
-    for field_name, field_value in fields_of_new_class.items():
-        if field_name not in fields_of_reference:
-            available_fields = ', '.join([f'"{x}"' for x in fields_of_reference])
+    for field_name, field_value in class_fields.items():
+        if field_name not in configs:
+            available_fields = ', '.join([f'"{x}"' for x in configs])
             raise NotExpectedConfigFieldError(f'Option "{field_name}" is not provided. Available options: {available_fields}.')
-        value = field_value[0] or field_value[1]() if field_value[1] else None
-        data[field_name] = value
-
-    configs.update(data)
+        configs[field_name] = field_value
 
     return Class
-
-
-config(ReferenceConfig)
