@@ -27,8 +27,9 @@ class QueueHandler(logging.Handler):
 def emit_output(queue, buffer, chunk_type):
     while True:
         string = buffer.getvalue()
-        chunk: ProcessOutputChunk = ProcessOutputChunk(value=string, type=chunk_type)
-        queue.put(chunk)
+        if string:
+            chunk: ProcessOutputChunk = ProcessOutputChunk(value=string, type=chunk_type)
+            queue.put(chunk)
 
 def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any]) -> None:
     """
