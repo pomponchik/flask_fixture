@@ -12,4 +12,4 @@ class RunningStartupResult:
     exception_name: Optional[str] = None
     exception_string: Optional[str] = None
     routes: Optional[list[str]] = None
-    configs: configs: Dict[str, Any] = None
+    configs: Dict[str, Any] = None
