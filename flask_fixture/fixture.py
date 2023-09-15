@@ -10,6 +10,7 @@ from flask_fixture.state_storage.collection_of_routes import routes
 from flask_fixture.state_storage.collection_of_importing_modules import modules
 from flask_fixture.state_storage.collection_of_configs import configs
 from flask_fixture.errors import NotExpectedConfigFieldError, UnsuccessfulProcessStartupError
+from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
 
 
 
@@ -21,9 +22,19 @@ handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'
 @shoot
 def listen_logs(queue: multiprocessing.Queue):
     while True:
-        record: logging.LogRecord = queue.get()
-        logger.handle(record)
+        chunk: ProcessOutputChunk = queue.get()
 
+        if chunk.type == ChunkType.LOG_RECORD:
+            record: logging.LogRecord = chunk.value
+            logger.handle(record)
+
+        elif chunk.type == ChunkType.STDOUT:
+            string: str = chunk.value
+            print(string, end='')
+
+        elif chunk.type == ChunkType.STDERR:
+            string: str = chunk.value
+            print(string, end='')
 
 
 @pytest.fixture(scope='session')

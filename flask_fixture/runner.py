@@ -7,9 +7,11 @@ from contextlib import redirect_stdout, redirect_stderr
 from multiprocessing import Queue
 
 from flask import Flask
+from awaits import shoot
 
 from flask_fixture.state_storage.collection_of_routes import routes
 from flask_fixture.dataclasses.running_startup_result import RunningStartupResult
+from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
 
 
 class QueueHandler(logging.Handler):
@@ -18,9 +20,15 @@ class QueueHandler(logging.Handler):
         self.queue = queue
 
     def emit(self, record: logging.LogRecord):
-        self.queue.put(record)
+        chunk: ProcessOutputChunk = ProcessOutputChunk(value=record, type=ChunkType.LOG_RECORD)
+        self.queue.put(chunk)
 
-
+@shoot
+def emit_output(queue, buffer, chunk_type):
+    while True:
+        string = buffer.getvalue()
+        chunk: ProcessOutputChunk = ProcessOutputChunk(value=string, type=chunk_type)
+        self.queue.put(chunk)
 
 def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any]) -> None:
     """
@@ -65,6 +73,10 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
         if not startup_result.success:
             return
 
-    with open(os.devnull, 'w') as devnull:
-        with redirect_stdout(devnull), redirect_stderr(devnull):
-            app.run(port=port)
+    buffer_stdout = io.StringIO()
+    buffer_stderr = io.StringIO()
+    emit_output(queue, buffer_stdout, ChunkType.STDOUT)
+    emit_output(queue, buffer_stderr, ChunkType.STDERR)
+
+    with redirect_stdout(buffer_stdout), redirect_stderr(buffer_stderr):
+        app.run(port=port)
