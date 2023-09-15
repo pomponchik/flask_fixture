@@ -13,11 +13,11 @@ from flask_fixture.dataclasses.running_startup_result import RunningStartupResul
 
 class QueueHandler(logging.Handler):
     def __init__(self, queue: Queue):
-            super().__init__(self)
-            self.queue = queue
+        super().__init__(self)
+        self.queue = queue
 
-        def emit(self, record: logging.LogRecord):
-            queue.put(record)
+    def emit(self, record: logging.LogRecord):
+        queue.put(record)
 
 
 
