@@ -70,5 +70,6 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
     buffer_stdout = io.StringIO()
     buffer_stderr = io.StringIO()
 
-    with redirect_stdout(buffer_stdout), redirect_stderr(buffer_stderr):
-        app.run(port=configs['port'])
+    with open(os.devnull, 'w') as devnull:
+        with redirect_stdout(devnull), redirect_stderr(devnull):
+            app.run(port=configs['port'])
