@@ -7,7 +7,6 @@ from contextlib import redirect_stdout, redirect_stderr
 from multiprocessing import Queue
 
 from flask import Flask
-from awaits import shoot
 
 from flask_fixture.state_storage.collection_of_routes import routes
 from flask_fixture.dataclasses.running_startup_result import RunningStartupResult
