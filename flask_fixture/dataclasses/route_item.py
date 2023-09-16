@@ -11,7 +11,3 @@ class RouteItem:
     args: Tuple[Any, ...]
     kwargs: Dict[str, Any]
     function: Callable[[...], Any]
-    module: Optional[str] = None
-
-    def __post_init__(self):
-        self.module = inspect.getmodule(self.function).__name__

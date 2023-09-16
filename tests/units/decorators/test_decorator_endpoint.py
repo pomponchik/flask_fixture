@@ -1,6 +1,6 @@
 import pytest
 
-from flask_fixture.decorator import endpoint
+from flask_fixture import endpoint
 from flask_fixture.errors import NeedToDefineURLError
 
 

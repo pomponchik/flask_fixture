@@ -3,8 +3,17 @@ import os
 import pytest
 from flask import render_template
 
-from flask_fixture import endpoint
+from flask_fixture import endpoint, config
 
+
+@config
+class MyConfig:
+    template_folder: str = os.path.join(
+        'tests',
+        'smokes',
+        'data',
+        'templates',
+    )
 
 @endpoint('/')
 def root():
@@ -13,12 +22,4 @@ def root():
 
 @endpoint('/simple_template')
 def simple_template():
-    return render_template(
-        os.path.join(
-            'tests',
-            'smokes',
-            'data',
-            'templates',
-            'index.html',
-        )
-    )
+    return render_template('index.html')

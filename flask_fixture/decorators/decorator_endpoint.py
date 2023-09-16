@@ -1,7 +1,9 @@
+import inspect
 from typing import Any, Callable
 
-from flask_fixture.route_item import RouteItem
-from flask_fixture.collection_of_routes import routes
+from flask_fixture.dataclasses.route_item import RouteItem
+from flask_fixture.state_storage.collection_of_routes import routes
+from flask_fixture.state_storage.collection_of_importing_modules import modules
 from flask_fixture.errors import NeedToDefineURLError
 
 
@@ -31,5 +33,6 @@ def endpoint(*args: Any, **kwargs: Any) -> Callable[[Callable[[...], Any]], Call
                 function=function,
             )
         )
+        modules.add(inspect.getmodule(function).__name__)
         return function
     return decorator
