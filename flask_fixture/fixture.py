@@ -11,12 +11,6 @@ from flask_fixture.errors import NotExpectedConfigFieldError, UnsuccessfulProces
 from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
 
 
-
-logger: logging.Handler = logging.getLogger('flask_fixture_logger')
-handler: logging.StreamHandler = logging.StreamHandler()
-logger.addHandler(handler)
-handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'))
-
 @shoot
 def listen_logs(queue: multiprocessing.Queue):
     while True:
@@ -25,7 +19,7 @@ def listen_logs(queue: multiprocessing.Queue):
         try:
             if chunk.type == ChunkType.LOG_RECORD:
                 record: logging.LogRecord = chunk.value
-                logger.handle(record)
+                logging.root.handle(record)
 
             elif chunk.type == ChunkType.STDOUT:
                 string: str = chunk.value
