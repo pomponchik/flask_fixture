@@ -2,7 +2,7 @@ import os
 import io
 import logging
 import traceback
-from typing import Dict, List, Any
+from typing import Dict, List, Type, Callable, Union, Any
 from contextlib import redirect_stdout, redirect_stderr
 from multiprocessing import Queue
 
@@ -13,7 +13,7 @@ from flask_fixture.dataclasses.running_startup_result import RunningStartupResul
 from flask_fixture.logging.queue_handler import QueueHandler
 
 
-def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any]) -> None:
+def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any], flask_app_fabric: Union[Type, Callable] = Flask) -> None:
     """
     The function is designed to run in a separate process. It starts the flask server.
 
@@ -30,7 +30,7 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
         for module in modules:
             __import__(module)
 
-        app = Flask('flask_fixture', template_folder=os.path.abspath(configs['template_folder']))
+        app = flask_app_fabric('flask_fixture', template_folder=os.path.abspath(configs['template_folder']))
 
         for route in routes:
             startup_result.routes.append(str(route))
