@@ -23,13 +23,6 @@ class QueueHandler(logging.Handler):
         chunk: ProcessOutputChunk = ProcessOutputChunk(value=record, type=ChunkType.LOG_RECORD)
         self.queue.put(chunk)
 
-@shoot
-def emit_output(queue, buffer, chunk_type):
-    while True:
-        string = buffer.read()
-        if string:
-            chunk: ProcessOutputChunk = ProcessOutputChunk(value=string, type=chunk_type)
-            queue.put(chunk)
 
 def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any]) -> None:
     """
@@ -76,8 +69,6 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
 
     buffer_stdout = io.StringIO()
     buffer_stderr = io.StringIO()
-    emit_output(queue, buffer_stdout, ChunkType.STDOUT)
-    emit_output(queue, buffer_stderr, ChunkType.STDERR)
 
     with redirect_stdout(buffer_stdout), redirect_stderr(buffer_stderr):
         app.run(port=configs['port'])
