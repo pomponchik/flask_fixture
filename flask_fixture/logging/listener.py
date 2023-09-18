@@ -6,11 +6,12 @@ import multiprocessing
 from awaits import shoot
 
 from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
+from flask_fixture.utils.thread_context import ThreadContext
 
 
 @shoot
-def listen_logs(queue: multiprocessing.Queue):
-    while True:
+def listen_logs(queue: multiprocessing.Queue, context: ThreadContext = ThreadContext()):
+    while context.keep_on():
         chunk: ProcessOutputChunk = queue.get()
 
         try:
