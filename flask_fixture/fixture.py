@@ -1,4 +1,6 @@
+import sys
 import logging
+import traceback
 import multiprocessing
 
 import pytest
@@ -30,7 +32,8 @@ def listen_logs(queue: multiprocessing.Queue):
                 print(string, end='')
 
         except Exception as e:
-            print(e)
+            print('Chang processing error.', file=sys.stderr)
+            traceback.print_exception(type(e), e, e.__traceback__)
 
 
 @pytest.fixture(scope='session')
