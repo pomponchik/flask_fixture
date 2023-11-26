@@ -1,0 +1,38 @@
+[build-system]
+requires = ['setuptools==68.0.0']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'flask_fixture'
+version = '0.0.4'
+authors = [
+  { name='Evgeniy Blinov', email='zheni-b@yandex.ru' },
+]
+description = 'Start and stop the flask server for your tests'
+readme = 'README.md'
+requires-python = '>=3.7'
+dependencies = [
+    'pageo==0.2.0',
+]
+classifiers = [
+  'Operating System :: MacOS :: MacOS X',
+  'Operating System :: Microsoft :: Windows',
+  'Operating System :: POSIX',
+  'Operating System :: POSIX :: Linux',
+  'Programming Language :: Python',
+  'Programming Language :: Python :: 3.10',
+  'Programming Language :: Python :: 3.11',
+  'License :: OSI Approved :: MIT License',
+  'Intended Audience :: Developers',
+  'Topic :: Software Development :: Libraries',
+  'Topic :: Software Development :: Testing',
+  'Framework :: Pytest',
+  'Framework :: Flask',
+]
+
+[project.entry-points.pytest11]
+flask_fixture = "flask_fixture"
+
+[project.urls]
+'Source' = 'https://github.com/pomponchik/flask_fixture'
+'Tracker' = 'https://github.com/pomponchik/flask_fixture/issues'
