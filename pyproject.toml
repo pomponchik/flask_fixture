@@ -12,7 +12,7 @@ description = 'Start and stop the flask server for your tests'
 readme = 'README.md'
 requires-python = '>=3.7'
 dependencies = [
-    'pageo==0.2.0',
+    'flask',
 ]
 classifiers = [
   'Operating System :: MacOS :: MacOS X',
