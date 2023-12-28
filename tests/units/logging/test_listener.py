@@ -1,22 +1,31 @@
 import io
-import from multiprocessing import Queue
+from queue import Queue
 from contextlib import redirect_stdout, redirect_stderr
 
-from cantok import SimpleToken
+import pytest
+from cantok import ConditionToken, SimpleToken
 
 from flask_fixture.logging.listener import listen_logs
 from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
 
 
-def test_listen_logs_stdout():
-    buffer_stdout = io.StringIO()
-    buffer_stderr = io.StringIO()
+@pytest.mark.parametrize(
+    'redirect_context_manager,chunk_type',
+    [
+        (redirect_stdout, ChunkType.STDOUT),
+        (redirect_stderr, ChunkType.STDERR),
+    ],
+)
+def test_listen_logs_stdout(redirect_context_manager, chunk_type):
+    expected_value = 'kek'
 
+    buffer = io.StringIO()
     queue = Queue()
-    token = ConditionToken(lambda: bool(buffer_stdout.getvalue()))
+    token = ConditionToken(lambda: bool(buffer.getvalue()))
 
-    with redirect_stdout(buffer_stdout), redirect_stderr(buffer_stderr):
-        listen_logs(queue, context)
-        queue.put(ProcessOutputChunk(value='kek', type=ChunkType.STDOUT), token=token)
+    with redirect_context_manager(buffer):
+        listen_logs(queue, token)
+        queue.put(ProcessOutputChunk(value=expected_value, type=chunk_type))
+        token.wait()
 
-    assert buffer_stdout.getvalue() == 'kek'
+    assert buffer.getvalue() == expected_value

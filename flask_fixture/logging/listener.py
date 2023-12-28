@@ -1,17 +1,17 @@
 import sys
 import logging
 import traceback
-import multiprocessing
 
 from awaits import shoot
 from cantok import AbstractToken, SimpleToken
 
+from flask_fixture.protocols.queue import QueueProtocol
 from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
 
 
 @shoot
-def listen_logs(queue: multiprocessing.Queue, token: AbstractToken = SimpleToken()):
-    while cancellation_token.keep_on():
+def listen_logs(queue: QueueProtocol, token: AbstractToken = SimpleToken()):
+    while token:
         chunk: ProcessOutputChunk = queue.get()
 
         try:
@@ -28,5 +28,5 @@ def listen_logs(queue: multiprocessing.Queue, token: AbstractToken = SimpleToken
                 print(string, end='', file=sys.stderr)
 
         except Exception as e:
-            print('Chang processing error.', file=sys.stderr)
+            print('Chunk processing error.', file=sys.stderr)
             traceback.print_exception(type(e), e, e.__traceback__)

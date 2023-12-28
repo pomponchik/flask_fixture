@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = 'flask_fixture'
-version = '0.0.4'
+version = '0.0.5'
 authors = [
   { name='Evgeniy Blinov', email='zheni-b@yandex.ru' },
 ]
@@ -15,6 +15,7 @@ dependencies = [
     'flask',
     'awaits',
     'cantok',
+    'typing_extensions ; python_version < "3.8"',
 ]
 classifiers = [
   'Operating System :: MacOS :: MacOS X',
@@ -33,7 +34,9 @@ classifiers = [
 ]
 
 [project.entry-points.pytest11]
-flask_fixture = "flask_fixture"
+flask_fixture = 'flask_fixture'
+
+
 
 [project.urls]
 'Source' = 'https://github.com/pomponchik/flask_fixture'
