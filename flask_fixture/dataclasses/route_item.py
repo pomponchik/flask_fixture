@@ -10,4 +10,4 @@ class RouteItem:
     """
     args: Tuple[Any, ...]
     kwargs: Dict[str, Any]
-    function: Callable[[...], Any]
+    function: Callable[[Any], Any]

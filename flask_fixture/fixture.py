@@ -1,44 +1,12 @@
-import logging
 import multiprocessing
-from threading import Thread
 
 import pytest
-from awaits import shoot
 
 from flask_fixture.runner import run_flask
-from flask_fixture.state_storage.collection_of_routes import routes
 from flask_fixture.state_storage.collection_of_importing_modules import modules
 from flask_fixture.state_storage.collection_of_configs import configs
 from flask_fixture.errors import NotExpectedConfigFieldError, UnsuccessfulProcessStartupError
-from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
-
-
-
-logger: logging.Handler = logging.getLogger('flask_fixture_logger')
-handler: logging.StreamHandler = logging.StreamHandler()
-logger.addHandler(handler)
-handler.setFormatter(logging.Formatter('%(asctime)s [%(levelname)s] %(message)s'))
-
-@shoot
-def listen_logs(queue: multiprocessing.Queue):
-    while True:
-        chunk: ProcessOutputChunk = queue.get()
-
-        try:
-            if chunk.type == ChunkType.LOG_RECORD:
-                record: logging.LogRecord = chunk.value
-                logger.handle(record)
-
-            elif chunk.type == ChunkType.STDOUT:
-                string: str = chunk.value
-                print(string, end='')
-
-            elif chunk.type == ChunkType.STDERR:
-                string: str = chunk.value
-                print(string, end='')
-
-        except Exception as e:
-            print(e)
+from flask_fixture.logging.listener import listen_logs
 
 
 @pytest.fixture(scope='session')
