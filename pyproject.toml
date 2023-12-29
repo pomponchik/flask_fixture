@@ -38,9 +38,7 @@ classifiers = [
 ]
 
 [project.entry-points.pytest11]
-flask_fixture = 'flask_fixture'
-
-
+flask_fixture = 'flask_fixture.fixture'
 
 [project.urls]
 'Source' = 'https://github.com/pomponchik/flask_fixture'
