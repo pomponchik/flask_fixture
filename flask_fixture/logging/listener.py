@@ -10,7 +10,7 @@ from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
 
 
 @shoot
-def listen_logs(queue: QueueProtocol, token: AbstractToken = SimpleToken()):
+def listen_logs(queue: QueueProtocol, token: AbstractToken = SimpleToken()) -> None:
     while token:
         chunk: ProcessOutputChunk = queue.get()
 
@@ -24,7 +24,7 @@ def listen_logs(queue: QueueProtocol, token: AbstractToken = SimpleToken()):
                 print(string, end='')
 
             elif chunk.type == ChunkType.STDERR:
-                string: str = chunk.value
+                string = chunk.value
                 print(string, end='', file=sys.stderr)
 
         except Exception as e:

@@ -1,4 +1,5 @@
 import multiprocessing
+from typing import Generator
 
 import pytest
 
@@ -7,10 +8,11 @@ from flask_fixture.state_storage.collection_of_importing_modules import modules
 from flask_fixture.state_storage.collection_of_configs import configs
 from flask_fixture.errors import NotExpectedConfigFieldError, UnsuccessfulProcessStartupError
 from flask_fixture.logging.listener import listen_logs
+from flask_fixture.protocols.queue import QueueProtocol
 
 
 @pytest.fixture(scope='session')
-def local_server_url(local_server_port: int = 5001) -> str:
+def local_server_url(local_server_port: int = 5001) -> Generator[str, None, None]:
     """
     A fixture that starts and then stops the Flask server through a separate process.
 
@@ -25,7 +27,7 @@ def local_server_url(local_server_port: int = 5001) -> str:
         if config_field_value is None:
             raise NotExpectedConfigFieldError()
 
-    queue = multiprocessing.Queue()
+    queue: QueueProtocol = multiprocessing.Queue()
 
     process = multiprocessing.Process(target=run_flask, args=(queue, local_server_port, list(modules), configs))
 

@@ -1,11 +1,11 @@
 import logging
-from multiprocessing import Queue
 
+from flask_fixture.protocols.queue import QueueProtocol
 from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
 
 
 class QueueHandler(logging.Handler):
-    def __init__(self, queue: Queue):
+    def __init__(self, queue: QueueProtocol):
         logging.Handler.__init__(self)
         self.queue = queue
 

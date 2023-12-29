@@ -13,7 +13,7 @@ from flask_fixture.dataclasses.running_startup_result import RunningStartupResul
 from flask_fixture.logging.queue_handler import QueueHandler
 
 
-def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any], flask_app_fabric: Union[Type, Callable] = Flask) -> None:
+def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any], flask_app_fabric: Union[Type, Callable[[], Any]] = Flask) -> None:
     """
     The function is designed to run in a separate process. It starts the flask server.
 
