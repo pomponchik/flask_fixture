@@ -40,6 +40,9 @@ classifiers = [
 [project.entry-points.pytest11]
 flask_fixture = 'flask_fixture.fixture'
 
+[tool.setuptools.package-data]
+"flask_fixture" = ["py.typed"]
+
 [project.urls]
 'Source' = 'https://github.com/pomponchik/flask_fixture'
 'Tracker' = 'https://github.com/pomponchik/flask_fixture/issues'
