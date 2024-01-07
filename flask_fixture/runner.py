@@ -4,7 +4,6 @@ import logging
 import traceback
 from typing import Dict, List, Type, Callable, Union, Any
 from contextlib import redirect_stdout, redirect_stderr
-from multiprocessing import Queue
 
 from flask import Flask
 
