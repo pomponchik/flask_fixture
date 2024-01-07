@@ -39,7 +39,7 @@ def local_server_url(local_server_port: int = 5001) -> Generator[str, None, None
         exception.traceback_string = startup_result.traceback
         raise exception
 
-    listen_logs(queue)
+    listen_logs(queue)  # type: ignore[arg-type]
 
     yield f'http://localhost:{configs["port"]}/'
 

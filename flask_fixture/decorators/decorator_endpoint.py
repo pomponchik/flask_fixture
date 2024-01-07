@@ -1,5 +1,6 @@
 import inspect
-from typing import Any, Callable
+from types import ModuleType
+from typing import Callable, Any, Optional
 
 from flask_fixture.dataclasses.route_item import RouteItem
 from flask_fixture.state_storage.collection_of_routes import routes
@@ -33,6 +34,10 @@ def endpoint(*args: Any, **kwargs: Any) -> Callable[[Callable[[Any], Any]], Call
                 function=function,
             )
         )
-        modules.add(inspect.getmodule(function).__name__)
+        
+        module: Optional[ModuleType] = inspect.getmodule(function)
+        if module is not None:
+            modules.add(module.__name__)
+
         return function
     return decorator

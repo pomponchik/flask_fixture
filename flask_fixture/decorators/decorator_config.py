@@ -1,11 +1,11 @@
-from typing import Type
+from typing import Type, Any
 from dataclasses import dataclass, fields
 
 from flask_fixture.errors import NotExpectedConfigFieldError
 from flask_fixture.state_storage.collection_of_configs import configs
 
 
-def config(Class: Type) -> Type:
+def config(Class: Type[Any]) -> Type[Any]:
     Class = dataclass(Class)
 
     class_fields = {field.name: field.default for field in fields(Class)}

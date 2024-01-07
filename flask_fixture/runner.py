@@ -13,7 +13,7 @@ from flask_fixture.dataclasses.running_startup_result import RunningStartupResul
 from flask_fixture.logging.queue_handler import QueueHandler
 
 
-def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any], flask_app_fabric: Union[Type, Callable[[], Any]] = Flask) -> None:
+def run_flask(queue: Queue[RunningStartupResult], port: int, modules: List[str], configs: Dict[str, Any], flask_app_fabric: Union[Type[Any], Callable[..., Any]] = Flask) -> None:
     """
     The function is designed to run in a separate process. It starts the flask server.
 
@@ -25,7 +25,8 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
 
     The queue is used to synchronize with the process that started this function. After the function is started, that process starts waiting for the function to put something in the queue. Thus, it is guaranteed that the starting process will not continue its execution before the server initialization occurs. This approach allows you to do without using sleep().
     """
-    startup_result = RunningStartupResult(success=True, routes=[], configs=configs)
+    startup_result = RunningStartupResult(success=True, configs=configs)
+
     try:
         for module in modules:
             __import__(module)
@@ -44,7 +45,7 @@ def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, An
         startup_result.success = False
 
         buffer = io.StringIO()
-        traceback.print_exception(e, file=buffer)
+        traceback.print_exception(e, file=buffer)  # type: ignore[call-arg, arg-type]
         traceback_string = buffer.getvalue()
 
         startup_result.traceback = traceback_string

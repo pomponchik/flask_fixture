@@ -1,5 +1,5 @@
 from typing import List, Dict, Optional, Any
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -10,5 +10,5 @@ class RunningStartupResult:
     traceback: Optional[str] = None
     exception_name: Optional[str] = None
     exception_string: Optional[str] = None
-    routes: Optional[List[str]] = None
-    configs: Dict[str, Any] = None
+    routes: List[str] = field(default_factory=lambda: [])
+    configs: Optional[Dict[str, Any]] = None
