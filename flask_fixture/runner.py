@@ -11,9 +11,10 @@ from flask import Flask
 from flask_fixture.state_storage.collection_of_routes import routes
 from flask_fixture.dataclasses.running_startup_result import RunningStartupResult
 from flask_fixture.logging.queue_handler import QueueHandler
+from flask_fixture.protocols.queue import QueueProtocol
 
 
-def run_flask(queue: Queue, port: int, modules: List[str], configs: Dict[str, Any], flask_app_fabric: Union[Type[Any], Callable[..., Any]] = Flask) -> None:
+def run_flask(queue: QueueProtocol, port: int, modules: List[str], configs: Dict[str, Any], flask_app_fabric: Union[Type[Any], Callable[..., Any]] = Flask) -> None:
     """
     The function is designed to run in a separate process. It starts the flask server.
 
