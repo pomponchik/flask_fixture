@@ -45,7 +45,7 @@ def run_flask(queue: QueueProtocol, port: int, modules: List[str], configs: Dict
         startup_result.success = False
 
         buffer = io.StringIO()
-        traceback.print_exception(e, file=buffer)  # type: ignore[call-arg, arg-type]
+        traceback.print_exception(e, file=buffer)  # type: ignore[call-arg, arg-type, unused-ignore]
         traceback_string = buffer.getvalue()
 
         startup_result.traceback = traceback_string

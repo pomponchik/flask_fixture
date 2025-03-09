@@ -3,7 +3,7 @@ from queue import Queue
 from contextlib import redirect_stdout, redirect_stderr
 
 import pytest
-from cantok import ConditionToken, SimpleToken
+from cantok import ConditionToken
 
 from flask_fixture.logging.listener import listen_logs
 from flask_fixture.dataclasses.output_chunk import ChunkType, ProcessOutputChunk
