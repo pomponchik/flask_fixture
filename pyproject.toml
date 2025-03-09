@@ -15,7 +15,6 @@ dependencies = [
     'flask',
     'awaits',
     'cantok',
-    'typing_extensions ; python_version < "3.8"',
 ]
 classifiers = [
   'Operating System :: MacOS :: MacOS X',
