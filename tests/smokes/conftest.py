@@ -1,6 +1,5 @@
 import os
 
-import pytest
 from flask import render_template
 
 from flask_fixture import endpoint, config

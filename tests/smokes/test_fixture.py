@@ -1,6 +1,5 @@
 import os
 import urllib
-import time
 
 import requests
 import pytest
