@@ -8,7 +8,7 @@ from flask_fixture.state_storage.collection_of_importing_modules import modules
 from flask_fixture.errors import NeedToDefineURLError
 
 
-def endpoint(*args: Any, **kwargs: Any) -> Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
+def endpoint(*args: Any, **kwargs: Any) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """
     A decorator factory that registers endpoints in the Flask application.
 
@@ -22,7 +22,7 @@ def endpoint(*args: Any, **kwargs: Any) -> Callable[[Callable[[Any], Any]], Call
     elif len(args) == 1 and callable(args[0]) and not kwargs:
         raise NeedToDefineURLError('The first argument to the decorator is to pass the expected URL.')
 
-    def decorator(function: Callable[[Any], Any]) -> Callable[[Any], Any]:
+    def decorator(function: Callable[..., Any]) -> Callable[..., Any]:
         """
         This decorator simply adds the signatures of the registered routes to a global list.
         This list will be recreated in the generated process, and the data from it will be used to create Flask routes.
@@ -34,7 +34,7 @@ def endpoint(*args: Any, **kwargs: Any) -> Callable[[Callable[[Any], Any]], Call
                 function=function,
             )
         )
-        
+
         module: Optional[ModuleType] = inspect.getmodule(function)
         if module is not None:
             modules.add(module.__name__)
