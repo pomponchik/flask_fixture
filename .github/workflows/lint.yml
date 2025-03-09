@@ -33,4 +33,4 @@ jobs:
 
     - name: Run ruff
       shell: bash
-      run: ruff flask_fixture
+      run: ruff check flask_fixture
