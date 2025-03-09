@@ -1,5 +1,6 @@
 pytest==7.4.3
 requests==2.32.3
+types-requests==2.32.0.20250306
 coverage==7.6.1
 twine==6.1.0
 wheel==0.40.0
